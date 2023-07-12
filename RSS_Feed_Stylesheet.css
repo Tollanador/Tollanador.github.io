@@ -3,6 +3,7 @@ body{
     padding:0;
     background-color:#f1e9f3;
     font-family: Arial, sans-serif; /* Use a readable font */
+    font-size:14px;
 }
 
 /* Remove image borders */
