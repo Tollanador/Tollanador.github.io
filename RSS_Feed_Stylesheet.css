@@ -3,7 +3,6 @@ body{
     padding:0;
     background-color:#f1e9f3;
     font-family: Arial, sans-serif; /* Use a readable font */
-    font-size:14px;
 }
 
 /* Remove image borders */
@@ -13,7 +12,6 @@ img {
 
 /* Style the feed container */
 .feed-container{
-    font-size:14px;
     border:1px solid #CCC;
     padding: 10px;
 }
