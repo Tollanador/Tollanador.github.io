@@ -14,6 +14,7 @@ img {
 .feed-container{
     border:1px solid #CCC;
     padding: 10px;
+    background-color:#f1e9f3;
 }
 
 .feed-container .content .title {
