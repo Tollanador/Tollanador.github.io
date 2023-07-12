@@ -15,53 +15,52 @@ img {
     font-size:14px;
     border:1px solid #CCC;
     padding: 15px;
-    background-color: #fff;
 }
 
 /* Style the title and link of each item */
-.feed-container .item .title {
+.feed-container .content .item .title {
     font-weight:bold;
     font-size: 16px;
     color: #9257a6;
     margin-bottom: 10px;
 }
 
-.feed-container .item .title a {
+.feed-container .content .item .title a {
     color: #9257a6;
     text-decoration:none;
 }
 
-.feed-container .item .title a:hover{
+.feed-container .content .item .title a:hover{
     color:#5a4860;
     text-decoration:underline;
 }
 
 /* Style the description of each item */
-.feed-container .item .description {
+.feed-container .content .item .description {
     color: #5a4860;
     margin-bottom: 20px;
 }
 
-.feed-container .item .description .ch-startdate,
-.feed-container .item .description .ch-enddate,
-.feed-container .item .description .ch-venue,
-.feed-container .item .description .ch-places {
+.feed-container .content .item .description .ch-startdate,
+.feed-container .content .item .description .ch-enddate,
+.feed-container .content .item .description .ch-venue,
+.feed-container .content .item .description .ch-places {
     font-weight: bold;
     color: #9257a6;
 }
 
-.feed-container .item .description .ch-summary {
+.feed-container .content .item .description .ch-summary {
     margin-top: 10px;
     color: #666;
 }
 
 /* Add some space between items */
-.feed-container .item {
+.feed-container .content .item {
     padding: 20px 0;
     border-bottom: 1px dashed #CCC;
 }
 
 /* Remove border from the last item */
-.feed-container .item:last-child {
+.feed-container .content .item:last-child {
     border-bottom: none;
 }
