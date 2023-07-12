@@ -22,12 +22,18 @@ img {
     padding: 3px;
     background-color:#f1e9f3;
 }
+.feed-container .content .title {
+    padding: 10px;
+    font-weight:bold;
+    background-color:#51247A;
+    font-size: 16px;
+}
 
 /* Style the title and link of each item */
 .feed-container .content .item .title {
     font-weight:bold;
-    font-size: 16px;
-    color: #51247A;
+    font-size: 14px;
+    color: #f1e9f3;
     margin-bottom: 10px;
 }
 
