@@ -14,18 +14,20 @@ img {
 .feed-container{
     font-size:16px;
     border:1px solid #CCC;
-    padding: 15px;
+    padding: 10px;
 }
 
 .feed-container .content {
-    margin:0px;padding:0 3px;background-color:#f1e9f3;
+    margin: 0px;
+    padding: 3px;
+    background-color:#f1e9f3;
 }
 
 /* Style the title and link of each item */
 .feed-container .content .item .title {
     font-weight:bold;
     font-size: 16px;
-    color: #9257a6;
+    color: #51247A;
     margin-bottom: 10px;
 }
 
@@ -42,7 +44,7 @@ img {
 /* Style the description of each item */
 .feed-container .content .item .description {
     color: #5a4860;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     font-size:16px;
 }
 
@@ -55,13 +57,13 @@ img {
 }
 
 .feed-container .content .item .description .ch-summary {
-    margin-top: 10px;
+    margin-top: 5px;
     color: #666;
 }
 
 /* Add some space between items */
 .feed-container .content .item {
-    padding: 5px 0;
+    padding: 5px ;
     border-bottom: 1px dashed #CCC;
 }
 
