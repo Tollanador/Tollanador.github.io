@@ -1,0 +1,65 @@
+body{
+    margin:0;
+    padding:0;
+    background-color:#f1e9f3;
+    font-family: Arial, sans-serif; /* Use a readable font */
+}
+
+/* Remove image borders */
+img {
+    border:0px;
+}
+
+/* Style the feed container */
+.feed-container{
+    font-size:14px;
+    border:1px solid #CCC;
+    padding: 15px;
+    background-color: #fff;
+}
+
+/* Style the title and link of each item */
+.feed-container .item .title {
+    font-weight:bold;
+    font-size: 16px;
+    color: #9257a6;
+    margin-bottom: 10px;
+}
+
+.feed-container .item .title a {
+    color: #9257a6;
+    text-decoration:none;
+}
+
+.feed-container .item .title a:hover{
+    color:#5a4860;
+    text-decoration:underline;
+}
+
+/* Style the description of each item */
+.feed-container .item .description {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.feed-container .item .description .ch-startdate,
+.feed-container .item .description .ch-enddate,
+.feed-container .item .description .ch-venue,
+.feed-container .item .description .ch-places {
+    font-weight: bold;
+}
+
+.feed-container .item .description .ch-summary {
+    margin-top: 10px;
+}
+
+/* Add some space between items */
+.feed-container .item {
+    padding: 20px 0;
+    border-bottom: 1px solid #CCC;
+}
+
+/* Remove border from the last item */
+.feed-container .item:last-child {
+    border-bottom: none;
+}
