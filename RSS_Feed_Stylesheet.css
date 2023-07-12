@@ -43,6 +43,7 @@ img {
 
 /* Style the description of each item */
 .feed-container .content .item .description {
+    background-color:#f1e9f3;
     color: #5a4860;
     margin-bottom: 5px;
     font-size:12px;
