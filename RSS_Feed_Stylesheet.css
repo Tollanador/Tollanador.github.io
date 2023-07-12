@@ -16,11 +16,6 @@ img {
     padding: 10px;
 }
 
-.feed-container .content {
-    margin: 0px;
-    padding: 3px;
-    background-color:#f1e9f3;
-}
 .feed-container .content .title {
     padding: 10px;
     font-weight:bold;
