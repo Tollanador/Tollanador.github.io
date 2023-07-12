@@ -12,7 +12,7 @@ img {
 
 /* Style the feed container */
 .feed-container{
-    font-size:16px;
+    font-size:14px;
     border:1px solid #CCC;
     padding: 10px;
 }
@@ -26,7 +26,6 @@ img {
     padding: 10px;
     font-weight:bold;
     background-color:#51247A;
-    font-size: 16px;
 }
 
 /* Style the title and link of each item */
@@ -51,7 +50,7 @@ img {
 .feed-container .content .item .description {
     color: #5a4860;
     margin-bottom: 5px;
-    font-size:16px;
+    font-size:14px;
 }
 
 .feed-container .content .item .description .ch-startdate,
