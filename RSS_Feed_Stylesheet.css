@@ -1,7 +1,7 @@
 body{
     margin:0;
     padding:0;
-    background-color:#f1e9f3;
+    background-color:#51247A;
     font-family: Arial, sans-serif; /* Use a readable font */
 }
 
@@ -17,9 +17,11 @@ img {
 }
 
 .feed-container .content .title {
-    padding: 10px;
+    padding: 5px;
     font-weight:bold;
-    background-color:#51247A;
+    background-color:#f1e9f3;
+    color: #9257a6;
+    font-size: 16px;
 }
 
 /* Style the title and link of each item */
