@@ -12,9 +12,13 @@ img {
 
 /* Style the feed container */
 .feed-container{
-    font-size:14px;
+    font-size:10px;
     border:1px solid #CCC;
     padding: 15px;
+}
+
+.feed-container .content {
+    margin:0px;padding:0 3px;background-color:#f1e9f3;
 }
 
 /* Style the title and link of each item */
