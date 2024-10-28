@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Course Profile Review Report</title>
+  <!-- Include Tailwind CSS via CDN for styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Include React and ReactDOM via CDN -->
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <!-- Include Babel for JSX transformation in the browser -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <!-- The root element where the React app will be mounted -->
+  <div id="root"></div>
+
+  <!-- The React code -->
+  <script type="text/babel">
+    const { useState } = React;
+
+    const ReportContainer = ({ children }) => (
+      <div className="bg-gradient-to-br from-indigo-900 via-purple-800 to-pink-700 min-h-screen p-4 text-white font-sans overflow-hidden">
+        {children}
+      </div>
+    );
+
+    const SectionTitle = ({ children }) => (
+      <h2 className="text-2xl font-bold mb-4 text-yellow-300 border-b border-yellow-300 pb-2">
+        {children}
+      </h2>
+    );
+
+    const ChecklistIcon = ({ status }) => {
+      const icon = status === 'pass' ? '✅' : status === 'warning' ? '⚠️' : '❌';
+      const bgColor =
+        status === 'pass'
+          ? 'bg-green-500'
+          : status === 'warning'
+          ? 'bg-yellow-500'
+          : 'bg-red-500';
+      return (
+        <span
+          className={`inline-flex items-center justify-center w-6 h-6 rounded-full ${bgColor} text-sm mr-2`}
+        >
+          {icon}
+        </span>
+      );
+    };
+
+    const ChecklistItem = ({ status, text }) => (
+      <div className="flex items-center mb-1 text-sm">
+        <ChecklistIcon status={status} />
+        <div>{text}</div>
+      </div>
+    );
+
+    const ChecklistSection = ({ title, items }) => {
+      const [isOpen, setIsOpen] = useState(false);
+      const passCount = items.filter((item) => item.status === 'pass').length;
+      const totalCount = items.length;
+
+      return (
+        <div className="mb-4 bg-white bg-opacity-10 rounded-lg p-3 shadow-lg transition-all duration-300 hover:bg-opacity-20">
+          <div
+            className="flex justify-between items-center cursor-pointer"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            <h3 className="text-lg font-semibold">{title}</h3>
+            <div className="flex items-center">
+              <span className="mr-2 text-sm">
+                {passCount}/{totalCount}
+              </span>
+              <span
+                className={`transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+              >
+                ▼
+              </span>
+            </div>
+          </div>
+          {isOpen && (
+            <div className="mt-2 space-y-1">
+              {items.map((item, index) => (
+                <ChecklistItem key={index} status={item.status} text={item.text} />
+              ))}
+            </div>
+          )}
+        </div>
+      );
+    };
+
+    const SummaryContainer = ({ children }) => (
+      <div className="bg-white text-gray-800 rounded-lg p-4 shadow-2xl mb-4">
+        {children}
+      </div>
+    );
+
+    const EmailContainer = ({ children }) => (
+      <div className="bg-gray-100 text-gray-800 rounded-lg p-4 shadow-2xl font-mono text-sm whitespace-pre-wrap">
+        {children}
+      </div>
+    );
+
+    const IssueItem = ({ number, title, description, action }) => (
+      <div className="mb-3 last:mb-0 bg-red-100 p-3 rounded-lg text-sm">
+        <h4 className="text-lg font-bold text-red-700 mb-1">
+          Issue {number}: {title}
+        </h4>
+        <p className="mb-1">
+          <strong className="text-red-600">Description:</strong> {description}
+        </p>
+        <p>
+          <strong className="text-red-600">Action Required:</strong> {action}
+        </p>
+      </div>
+    );
+
+    const AnimatedProgressBar = ({ value }) => (
+      <div className="w-full h-3 bg-gray-300 rounded-full overflow-hidden">
+        <div
+          className="h-full bg-gradient-to-r from-green-400 to-blue-500 transition-all duration-1000 ease-out"
+          style={{ width: `${value}%` }}
+        />
+      </div>
+    );
+
+    const TabButton = ({ active, onClick, children }) => (
+      <button
+        className={`px-4 py-2 rounded-t-lg font-semibold transition-colors duration-300 ${
+          active
+            ? 'bg-white text-purple-800'
+            : 'bg-purple-300 text-purple-800 hover:bg-purple-200'
+        }`}
+        onClick={onClick}
+      >
+        {children}
+      </button>
+    );
+
+    const CourseProfileReviewReport = () => {
+      const [activeTab, setActiveTab] = useState('checklist');
+
+      return (
+        <ReportContainer>
+          <header className="text-center mb-6">
+            <h1 className="text-4xl font-bold mb-2 animate-pulse">
+              Course Profile Review Report
+            </h1>
+            <p className="text-lg">Work Integrated Learning - Summer Semester 2024</p>
+          </header>
+
+          <div className="flex justify-between items-center mb-4">
+            <div className="flex space-x-2">
+              <TabButton
+                active={activeTab === 'checklist'}
+                onClick={() => setActiveTab('checklist')}
+              >
+                Checklist
+              </TabButton>
+              <TabButton
+                active={activeTab === 'summary'}
+                onClick={() => setActiveTab('summary')}
+              >
+                Summary
+              </TabButton>
+              <TabButton
+                active={activeTab === 'email'}
+                onClick={() => setActiveTab('email')}
+              >
+                Email
+              </TabButton>
+            </div>
+            <div className="flex items-center">
+              <span className="mr-2 text-sm font-semibold">Overall Progress:</span>
+              <div className="w-32">
+                <AnimatedProgressBar value={95} />
+              </div>
+              <span className="ml-2 text-sm font-semibold">95%</span>
+            </div>
+          </div>
+
+          {activeTab === 'checklist' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <ChecklistSection
+                title="2.1 Course Overview"
+                items={[
+                  {
+                    text: 'COURSE DESCRIPTION and COURSE AIMS are free of errors.',
+                    status: 'pass',
+                  },
+                  {
+                    text: "COURSE INSTANCE DESCRIPTION does not duplicate other sections.",
+                    status: 'pass',
+                  },
+                  {
+                    text: 'TEACHING WEEK CALENDAR is appropriate for a non-standard (Summer Semester) course.',
+                    status: 'pass',
+                  },
+                  {
+                    text: 'ADDITIONAL TIMETABLE INFORMATION standard text is added.',
+                    status: 'pass',
+                  },
+                  {
+                    text: "'IS THIS INSTANCE BEING JOINTLY TAUGHT?' is set to NO.",
+                    status: 'pass',
+                  },
+                ]}
+              />
+              <ChecklistSection
+                title="2.2 Course Requirements"
+                items={[
+                  {
+                    text: 'No issues found in the grey boxed fields.',
+                    status: 'pass',
+                  },
+                ]}
+              />
+              <ChecklistSection
+                title="2.3 Course Enquiries"
+                items={[
+                  {
+                    text: 'Section is acceptable as per SOP guidelines.',
+                    status: 'pass',
+                  },
+                ]}
+              />
+              <ChecklistSection
+                title="2.4 Course Contributors"
+                items={[
+                  {
+                    text: 'Course Coordinator matches the tracker sheet.',
+                    status: 'pass',
+                  },
+                  {
+                    text: 'Lecturers, including the CC, are correctly listed.',
+                    status: 'pass',
+                  },
+                  {
+                    text: 'No incorrect staff names are included.',
+                    status: 'pass',
+                  },
+                ]}
+              />
+              <ChecklistSection
+                title="2.5 Aims & Outcomes"
+                items={[
+                  {
+                    text: 'Typographical error found in LEARNING OUTCOME LO4.',
+                    status: 'fail',
+                  },
+                  {
+                    text: "No group names or duplicates in LEARNING OUTCOMES.",
+                    status: 'pass',
+                  },
+                ]}
+              />
+              <ChecklistSection
+                title="2.6 Assessment"
+                items={[
+                  {
+                    text: 'Relative Dates are used where possible.',
+                    status: 'pass',
+                  },
+                  {
+                    text: 'Assessments comply with UQ Assessment procedures.',
+                    status: 'pass',
+                  },
+                  {
+                    text: 'Each assessment has a WEIGHTING specified.',
+                    status: 'pass',
+                  },
+                  {
+                    text: "'Group' or 'Individual' is removed from WEIGHT DESCRIPTION where appropriate.",
+                    status: 'pass',
+                  },
+                  {
+                    text: 'Assessments are correctly identified as sequences if applicable.',
+                    status: 'pass',
+                  },
+                  {
+                    text: 'TASK DESCRIPTIONS are well-formatted and include AI Statements.',
+                    status: 'pass',
+                  },
+                  {
+                    text: 'CATEGORY, MODE, and CONDITIONS are appropriate.',
+                    status: 'pass',
+                  },
+                  {
+                    text: 'LATE SUBMISSION PENALTIES are appropriate for each assessment.',
+                    status: 'pass',
+                  },
+                  {
+                    text: 'EXTENSION/DEFERRAL AVAILABILITY is correctly set.',
+                    status: 'pass',
+                  },
+                  {
+                    text: "GRADE BOUNDARIES are set to 'Percent' and match the Grade Range.",
+                    status: 'pass',
+                  },
+                  {
+                    text: 'ADDITIONAL COURSE GRADING INFORMATION contains standard text.',
+                    status: 'pass',
+                  },
+                  {
+                    text: 'SUPPLEMENTARY ASSESSMENT is set to default.',
+                    status: 'pass',
+                  },
+                  {
+                    text: 'No additional assessment information is incorrectly included.',
+                    status: 'pass',
+                  },
+                ]}
+              />
+              <ChecklistSection
+                title="2.7 Learning Resources"
+                items={[
+                  {
+                    text: 'Sections are cleared of unnecessary text.',
+                    status: 'pass',
+                  },
+                  {
+                    text: 'Standard default learning resources statement is present.',
+                    status: 'pass',
+                  },
+                  {
+                    text: "Software requirements are correctly indicated as 'No'.",
+                    status: 'pass',
+                  },
+                ]}
+              />
+              <ChecklistSection
+                title="2.8 Learning Activities"
+                items={[
+                  {
+                    text: 'Activities are scheduled according to the timetable.',
+                    status: 'pass',
+                  },
+                  {
+                    text: 'Activities have appropriate titles and descriptions.',
+                    status: 'pass',
+                  },
+                  {
+                    text: 'ACTIVITY TYPE matches the scheduled offering.',
+                    status: 'pass',
+                  },
+                  {
+                    text: 'DESCRIPTION fields are appropriate and non-duplicative.',
+                    status: 'pass',
+                  },
+                  {
+                    text: 'Activity date information is correctly formatted for an intensive course.',
+                    status: 'pass',
+                  },
+                  {
+                    text: 'Additional learning activity information is appropriate.',
+                    status: 'pass',
+                  },
+                  {
+                    text: 'Assessment due dates do not align with scheduled learning activities.',
+                    status: 'fail',
+                  },
+                  {
+                    text: 'No activities are scheduled on public holidays.',
+                    status: 'pass',
+                  },
+                ]}
+              />
+              <ChecklistSection
+                title="2.9 Learning Outcome Mapping"
+                items={[
+                  {
+                    text: 'Assessments and activities are correctly mapped to learning outcomes.',
+                    status: 'pass',
+                  },
+                ]}
+              />
+              <ChecklistSection
+                title="2.10 Policies & Guidelines"
+                items={[
+                  {
+                    text: 'No additional university policies are selected.',
+                    status: 'pass',
+                  },
+                  {
+                    text: "INCLUDE SCHOOL GUIDELINES? is set to 'No'.",
+                    status: 'pass',
+                  },
+                  {
+                    text: 'COURSE GUIDELINES are appropriately included or omitted.',
+                    status: 'pass',
+                  },
+                ]}
+              />
+            </div>
+          )}
+
+          {activeTab === 'summary' && (
+            <SummaryContainer>
+              <SectionTitle>🔎 Summary of Issues</SectionTitle>
+              <IssueItem
+                number={1}
+                title="Typographical Error in Learning Outcome LO4"
+                description="There is a missing apostrophe in 'industry partners problem' in LO4. It should read 'industry partner's problem.'"
+                action="Update LO4 to correct the typographical error."
+              />
+              <IssueItem
+                number={2}
+                title="Misalignment of Assessment Due Date and Learning Activities"
+                description="The Team Presentation is scheduled for 22/11/2024 in the assessments but is not reflected in the Learning Activities for that date."
+                action="Update the Learning Activity on 22/11/2024 to include the Team Presentation or adjust the assessment due date to align with the scheduled activities."
+              />
+            </SummaryContainer>
+          )}
+
+          {activeTab === 'email' && (
+            <EmailContainer>
+              <SectionTitle>📧 Email to Course Coordinator</SectionTitle>
+              <p>
+                <strong>Subject:</strong> Action Required: Course Profile Review for
+                Summer Semester 2024
+              </p>
+              <p>Dear Associate Professor von Briel,</p>
+              <p>
+                I hope this message finds you well. I have completed the review of
+                the course profile for{' '}
+                <strong>
+                  Work Integrated Learning (Course Code)
+                </strong>{' '}
+                for the Summer Semester, 2024.
+              </p>
+              <p>
+                During the review, I identified a couple of items that require your
+                attention before we can proceed with publishing:
+              </p>
+              <ol>
+                <li>
+                  <strong>Typographical Error in Learning Outcome LO4:</strong>
+                  <br />
+                  <em>Issue:</em> In LO4, there is a missing apostrophe in "industry
+                  partners problem." It should read "industry partner's problem."
+                  <br />
+                  <em>Action Required:</em> Please update LO4 to correct this error.
+                </li>
+                <li>
+                  <strong>
+                    Alignment of Assessment Due Dates and Learning Activities:
+                  </strong>
+                  <br />
+                  <em>Issue:</em> The Team Presentation is scheduled for{' '}
+                  <strong>22/11/2024</strong> in the assessment section, but the
+                  Learning Activity for that date does not mention the presentation.
+                  <br />
+                  <em>Action Required:</em> Please update the Learning Activity on{' '}
+                  <strong>22/11/2024</strong> to include the Team Presentation or
+                  adjust the assessment due date to align with the scheduled
+                  activities.
+                </li>
+              </ol>
+              <p>
+                Could you please make these adjustments at your earliest
+                convenience? Once these issues are addressed, we can proceed with
+                publishing the course profile.
+              </p>
+              <p>
+                If you have any questions or need assistance, feel free to reach
+                out.
+              </p>
+              <p>
+                Best regards,
+                <br />
+                [Your Name]
+                <br />
+                UQBS eLearning Officer
+              </p>
+            </EmailContainer>
+          )}
+        </ReportContainer>
+      );
+    };
+
+    ReactDOM.render(<CourseProfileReviewReport />, document.getElementById('root'));
+  </script>
+</body>
+</html>
