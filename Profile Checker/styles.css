@@ -2,32 +2,104 @@
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    background-color: #f7f9fc;
-    color: #333;
+    background: linear-gradient(135deg, #4c1d95, #6b21a8, #9333ea, #a855f7);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    color: #ffffff;
+}
+
+/* Gradient Background Animation */
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 /* Container */
 .container {
     max-width: 800px;
     margin: 50px auto;
-    padding: 0 20px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    color: #f1f5f9;
     text-align: center;
 }
 
-/* Heading */
-h1 {
-    font-weight: 600;
-    margin-bottom: 10px;
+/* Header */
+header {
+    margin-bottom: 30px;
 }
 
-p {
+header h1 {
+    font-size: 1.8em;
+    font-weight: 600;
+}
+
+.subtitle {
+    color: #e0e7ff;
     font-weight: 300;
-    color: #666;
+}
+
+/* Progress Bar */
+.progress {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.progress-bar {
+    width: 70%;
+    height: 10px;
+    background: #e5e7eb;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #38bdf8, #4ade80);
+    border-radius: 5px;
+}
+
+.progress-percent {
+    margin-left: 10px;
+    font-weight: 500;
+}
+
+/* Tab Buttons */
+.tab-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.tab {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.tab.active {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.tab:hover {
+    background: rgba(255, 255, 255, 0.3);
 }
 
 /* Input Section */
 .input-section {
-    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .input-section textarea,
@@ -36,37 +108,37 @@ p {
     max-width: 600px;
     padding: 15px;
     margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    border: none;
+    border-radius: 8px;
     font-size: 16px;
-}
-
-.input-section span {
-    display: block;
-    margin: 20px 0;
-    font-weight: 600;
-    color: #999;
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    outline: none;
+    caret-color: #9333ea;
 }
 
 .input-section button {
     padding: 15px 30px;
     font-size: 16px;
-    background-color: #007acc;
-    color: #fff;
+    background-color: #9333ea;
+    color: #ffffff;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
 }
 
 .input-section button:hover {
-    background-color: #005fa3;
+    background-color: #7e22ce;
 }
 
 /* Loader */
 .loader {
     margin: 30px auto;
     border: 8px solid #f3f3f3;
-    border-top: 8px solid #007acc;
+    border-top: 8px solid #9333ea;
     border-radius: 50%;
     width: 60px;
     height: 60px;
@@ -78,25 +150,28 @@ p {
 }
 
 /* Output Section */
-.output-section, .error-section {
-    margin-top: 40px;
-    text-align: left;
+.output-section,
+.error-section {
+    margin-top: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 8px;
 }
 
-.output-section h2, .error-section h2 {
+.output-section h2,
+.error-section h2 {
     font-weight: 600;
-    margin-bottom: 10px;
 }
 
 #output {
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #ddd;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 5px;
+    color: #f1f5f9;
 }
 
 /* Error Message */
 .error-section p {
-    color: #d9534f;
+    color: #f87171;
     font-weight: 500;
 }
