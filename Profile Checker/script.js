@@ -1,110 +1,120 @@
-document.getElementById('submitBtn').addEventListener('click', processInput);
-
-async function processInput() {
-    const userText = document.getElementById('userInput').value.trim();
-    const userURL = document.getElementById('userURL').value.trim();
-    const loader = document.getElementById('loader');
+document.addEventListener('DOMContentLoaded', () => {
+    // Elements
+    const form = document.getElementById('profileForm');
+    const textInput = document.getElementById('textInput');
+    const urlInput = document.getElementById('urlInput');
+    const submitButton = document.getElementById('submitButton');
+    const buttonText = submitButton.querySelector('.button-text');
+    const loader = submitButton.querySelector('.loader');
     const outputSection = document.getElementById('outputSection');
+    const output = document.getElementById('output');
     const errorSection = document.getElementById('errorSection');
-    const outputDiv = document.getElementById('output');
     const errorMessage = document.getElementById('errorMessage');
+    const textInputContainer = document.getElementById('textInputContainer');
+    const urlInputContainer = document.getElementById('urlInputContainer');
+    const tabButtons = document.querySelectorAll('.tab-button');
 
-    // Reset sections
-    outputSection.style.display = 'none';
-    errorSection.style.display = 'none';
-    outputDiv.innerHTML = '';
-    errorMessage.innerText = '';
+    // Tab switching
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Update active tab
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
 
-    let inputContent = '';
+            // Show/hide appropriate input
+            const tabType = button.dataset.tab;
+            if (tabType === 'text') {
+                textInputContainer.classList.remove('hidden');
+                urlInputContainer.classList.add('hidden');
+            } else {
+                textInputContainer.classList.add('hidden');
+                urlInputContainer.classList.remove('hidden');
+            }
+        });
+    });
 
-    // Validate input
-    if (userText) {
-        inputContent = userText;
-    } else if (userURL) {
-        inputContent = await extractTextFromURL(userURL);
-        if (!inputContent) {
-            displayError('Failed to extract text from the provided URL.');
+    // Form submission
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // Get active input value
+        const activeTab = document.querySelector('.tab-button.active').dataset.tab;
+        const inputValue = activeTab === 'text' ? textInput.value : urlInput.value;
+
+        if (!inputValue.trim()) {
+            displayError('Please enter text or provide a valid URL.');
             return;
         }
-    } else {
-        displayError('Please enter text or provide a valid URL.');
-        return;
+
+        // Start loading state
+        setLoading(true);
+
+        try {
+            // Create custom prompt
+            const customPrompt = `Analyze this course profile content: ${inputValue}`;
+
+            const response = await fetch('https://<your-worker-name>.workers.dev', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    model: "text-davinci-003",
+                    prompt: customPrompt,
+                    max_tokens: 500,
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error(`Server responded with ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            if (data.error) {
+                throw new Error(data.error.message);
+            }
+
+            const openAIResponse = data.choices[0].text;
+            const htmlContent = extractHTML(openAIResponse);
+
+            if (htmlContent) {
+                displayOutput(htmlContent);
+            } else {
+                displayError('No HTML content found in the response.');
+            }
+        } catch (error) {
+            displayError(`An error occurred: ${error.message}`);
+        } finally {
+            setLoading(false);
+        }
+    });
+
+    function setLoading(isLoading) {
+        submitButton.disabled = isLoading;
+        loader.classList.toggle('hidden', !isLoading);
+        buttonText.textContent = isLoading ? 'Processing Profile...' : 'Analyze Profile';
     }
 
-    // Show loader
-    loader.style.display = 'block';
-
-    // Create custom prompt
-    const customPrompt = `Your custom prompt with the user input inserted in the middle: ... ${inputContent} ...`;
-
-    try {
-        const response = await fetch('https://<your-worker-name>.workers.dev', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                model: "text-davinci-003",
-                prompt: customPrompt,
-                max_tokens: 500,
-            })
-        });
-
-        if (!response.ok) {
-            throw new Error(`Server responded with ${response.status}`);
-        }
-
-        const data = await response.json();
-
-        if (data.error) {
-            throw new Error(data.error.message);
-        }
-
-        const openAIResponse = data.choices[0].text;
-
-        // Extract HTML from the response
-        const htmlContent = extractHTML(openAIResponse);
-
-        // Hide loader
-        loader.style.display = 'none';
-
-        if (htmlContent) {
-            outputDiv.innerHTML = htmlContent;
-            outputSection.style.display = 'block';
-        } else {
-            displayError('No HTML content found in the response.');
-        }
-
-    } catch (error) {
-        loader.style.display = 'none';
-        displayError(`An error occurred: ${error.message}`);
+    function displayOutput(content) {
+        errorSection.classList.add('hidden');
+        output.innerHTML = content;
+        outputSection.classList.remove('hidden');
     }
-}
 
-function extractHTML(text) {
-    // Simple regex to extract HTML content
-    const htmlMatch = text.match(/<html.*?>[\s\S]*<\/html>/i);
-    if (htmlMatch) {
-        return htmlMatch[0];
-    } else {
-        // Alternatively, return the whole text if it is HTML
-        if (text.trim().startsWith('<')) {
+    function displayError(message) {
+        outputSection.classList.add('hidden');
+        errorMessage.textContent = message;
+        errorSection.classList.remove('hidden');
+    }
+
+    function extractHTML(text) {
+        const htmlMatch = text.match(/<html.*?>[\s\S]*<\/html>/i);
+        if (htmlMatch) {
+            return htmlMatch[0];
+        } else if (text.trim().startsWith('<')) {
             return text.trim();
         }
+        return null;
     }
-    return null;
-}
-
-function displayError(message) {
-    const errorSection = document.getElementById('errorSection');
-    const errorMessage = document.getElementById('errorMessage');
-    errorMessage.innerText = message;
-    errorSection.style.display = 'block';
-}
-
-async function extractTextFromURL(url) {
-    // Placeholder function for URL text extraction
-    // TODO: Implement text extraction logic here
-    // For now, it returns null to simulate failure
-    return null;
-}
+});
