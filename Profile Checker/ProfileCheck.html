@@ -12,28 +12,36 @@
 <body>
     <div class="container">
         <header>
-            <h1>Text to HTML Converter</h1>
-            <p class="subtitle">Provide Text or URL to convert into HTML</p>
+            <h1>Course Profile Review Report</h1>
+            <p class="subtitle">Work Integrated Learning - Summer Semester 2024</p>
             <div class="progress">
                 <span>Overall Progress:</span>
                 <div class="progress-bar">
-                    <div class="progress-fill" style="width: 75%;"></div>
+                    <div class="progress-fill" style="width: 55%;"></div>
                 </div>
-                <span class="progress-percent">75%</span>
+                <span class="progress-percent">55%</span>
             </div>
         </header>
         
         <div class="tab-container">
-            <button class="tab active">Text</button>
-            <button class="tab">URL</button>
+            <button class="tab active">Checklist</button>
+            <button class="tab">Summary</button>
+            <button class="tab">Email</button>
         </div>
 
-        <div class="input-section">
-            <textarea id="userInput" placeholder="Paste your text here..."></textarea>
-            <input type="url" id="userURL" placeholder="Enter a URL (e.g., https://example.com)">
-            <button id="submitBtn">Convert</button>
+        <div class="section-card">
+            <h2>2.1 Course Overview</h2>
+            <p>Section is acceptable as per SOP guidelines.</p>
+            <span class="completion-status">5/5</span>
         </div>
 
+        <div class="section-card">
+            <h2>2.3 Course Enquiries</h2>
+            <p>Section is acceptable as per SOP guidelines.</p>
+            <span class="completion-status">1/1</span>
+        </div>
+
+        <!-- Additional sections -->
         <div id="loader" class="loader" style="display: none;"></div>
         
         <div id="outputSection" class="output-section" style="display: none;">
