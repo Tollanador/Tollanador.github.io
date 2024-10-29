@@ -2,71 +2,62 @@
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #4c1d95, #6b21a8, #9333ea, #a855f7);
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
+    background: linear-gradient(135deg, #1a0641, #32096d);
     color: #ffffff;
-}
-
-/* Gradient Background Animation */
-@keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
 }
 
 /* Container */
 .container {
-    max-width: 800px;
-    margin: 50px auto;
+    max-width: 900px;
+    margin: 30px auto;
     padding: 20px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-    color: #f1f5f9;
     text-align: center;
 }
 
 /* Header */
 header {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 header h1 {
-    font-size: 1.8em;
+    font-size: 2em;
     font-weight: 600;
+    color: #ffffff;
 }
 
 .subtitle {
-    color: #e0e7ff;
+    color: #b8a3e0;
     font-weight: 300;
+    font-size: 1em;
 }
 
 /* Progress Bar */
 .progress {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 10px;
     margin-top: 15px;
+    font-size: 0.9em;
 }
 
 .progress-bar {
-    width: 70%;
+    width: 60%;
     height: 10px;
-    background: #e5e7eb;
+    background: #44337a;
     border-radius: 5px;
     overflow: hidden;
 }
 
 .progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, #38bdf8, #4ade80);
-    border-radius: 5px;
+    background: linear-gradient(90deg, #48bb78, #38a169);
+    width: 55%;
 }
 
 .progress-percent {
-    margin-left: 10px;
     font-weight: 500;
+    color: #e2e8f0;
 }
 
 /* Tab Buttons */
@@ -79,66 +70,63 @@ header h1 {
 .tab {
     padding: 10px 20px;
     border: none;
-    border-radius: 8px;
+    border-radius: 5px;
     font-weight: 500;
     color: #ffffff;
-    background: rgba(255, 255, 255, 0.2);
+    background: #4a306d;
+    margin: 0 5px;
     cursor: pointer;
     transition: background 0.3s ease;
 }
 
 .tab.active {
-    background: rgba(255, 255, 255, 0.4);
+    background: #6b5bb3;
 }
 
 .tab:hover {
-    background: rgba(255, 255, 255, 0.3);
+    background: #5a4899;
 }
 
-/* Input Section */
-.input-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.input-section textarea,
-.input-section input {
-    width: 100%;
-    max-width: 600px;
+/* Section Cards */
+.section-card {
+    background: #5a2e88;
     padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
     margin: 10px 0;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    background: rgba(255, 255, 255, 0.2);
+    text-align: left;
     color: #ffffff;
-    outline: none;
-    caret-color: #9333ea;
+    position: relative;
 }
 
-.input-section button {
-    padding: 15px 30px;
-    font-size: 16px;
-    background-color: #9333ea;
+.section-card h2 {
+    font-size: 1.2em;
+    font-weight: 500;
     color: #ffffff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
+}
+
+.section-card p {
+    color: #e2e8f0;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
+.completion-status {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    background: #4ade80;
+    color: #1a202c;
     font-weight: 600;
-    transition: background-color 0.3s ease;
-    margin-top: 10px;
-}
-
-.input-section button:hover {
-    background-color: #7e22ce;
+    padding: 5px 10px;
+    border-radius: 5px;
 }
 
 /* Loader */
 .loader {
     margin: 30px auto;
     border: 8px solid #f3f3f3;
-    border-top: 8px solid #9333ea;
+    border-top: 8px solid #6b21a8;
     border-radius: 50%;
     width: 60px;
     height: 60px;
@@ -150,24 +138,19 @@ header h1 {
 }
 
 /* Output Section */
-.output-section,
-.error-section {
+.output-section, .error-section {
     margin-top: 20px;
-    background: rgba(255, 255, 255, 0.1);
+    background: #3c1c5b;
     padding: 20px;
     border-radius: 8px;
-}
-
-.output-section h2,
-.error-section h2 {
-    font-weight: 600;
-}
-
-#output {
-    padding: 10px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 5px;
     color: #f1f5f9;
+    text-align: left;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.output-section h2, .error-section h2 {
+    font-weight: 600;
+    color: #ffffff;
 }
 
 /* Error Message */
