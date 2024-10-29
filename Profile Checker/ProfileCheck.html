@@ -2,59 +2,73 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Text to HTML Converter</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Include Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <!-- Link to CSS -->
-    <link rel="stylesheet" href="styles.css">
+    <title>Course Profile Review Report</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>Course Profile Review Report</h1>
-            <p class="subtitle">Work Integrated Learning - Summer Semester 2024</p>
-            <div class="progress">
-                <span>Overall Progress:</span>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 55%;"></div>
-                </div>
-                <span class="progress-percent">55%</span>
+        <div class="content-wrapper">
+            <!-- Header -->
+            <div class="header">
+                <h1>Course Profile Review Report</h1>
+                <p>Work Integrated Learning - Summer Semester 2024</p>
             </div>
-        </header>
-        
-        <div class="tab-container">
-            <button class="tab active">Checklist</button>
-            <button class="tab">Summary</button>
-            <button class="tab">Email</button>
-        </div>
 
-        <div class="section-card">
-            <h2>2.1 Course Overview</h2>
-            <p>Section is acceptable as per SOP guidelines.</p>
-            <span class="completion-status">5/5</span>
-        </div>
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- Tabs -->
+                <div class="tabs">
+                    <button class="tab-button active" data-tab="text">Text Input</button>
+                    <button class="tab-button" data-tab="url">URL Input</button>
+                </div>
 
-        <div class="section-card">
-            <h2>2.3 Course Enquiries</h2>
-            <p>Section is acceptable as per SOP guidelines.</p>
-            <span class="completion-status">1/1</span>
-        </div>
+                <!-- Input Form -->
+                <form id="profileForm" class="input-form">
+                    <div class="input-container" id="textInputContainer">
+                        <textarea 
+                            placeholder="Paste your course profile content here..."
+                            id="textInput"
+                        ></textarea>
+                    </div>
+                    <div class="input-container hidden" id="urlInputContainer">
+                        <input 
+                            type="url" 
+                            placeholder="Enter course profile URL..."
+                            id="urlInput"
+                        />
+                    </div>
 
-        <!-- Additional sections -->
-        <div id="loader" class="loader" style="display: none;"></div>
-        
-        <div id="outputSection" class="output-section" style="display: none;">
-            <h2>Generated HTML:</h2>
-            <div id="output"></div>
-        </div>
-        
-        <div id="errorSection" class="error-section" style="display: none;">
-            <h2>Error:</h2>
-            <p id="errorMessage"></p>
+                    <button type="submit" id="submitButton" class="submit-button">
+                        <span class="button-content">
+                            <span class="loader hidden"></span>
+                            <span class="button-text">Analyze Profile</span>
+                        </span>
+                    </button>
+                </form>
+
+                <!-- Output Section -->
+                <div id="outputSection" class="output-section hidden">
+                    <div class="output-header">
+                        <h2>Analysis Results</h2>
+                        <svg class="chevron-down" viewBox="0 0 24 24" width="24" height="24">
+                            <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="output-content">
+                        <div id="output"></div>
+                    </div>
+                </div>
+
+                <!-- Error Section -->
+                <div id="errorSection" class="error-section hidden">
+                    <h2>Error</h2>
+                    <p id="errorMessage"></p>
+                </div>
+            </div>
         </div>
     </div>
-    <!-- Link to JavaScript -->
     <script src="script.js"></script>
 </body>
 </html>
