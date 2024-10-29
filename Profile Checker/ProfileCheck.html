@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Text to HTML Converter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Include Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600&display=swap" rel="stylesheet">
+    <!-- Link to CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Text to HTML Converter</h1>
+        <p>Enter text or provide a URL to convert its content into HTML.</p>
+        <div class="input-section">
+            <textarea id="userInput" placeholder="Paste your text here..."></textarea>
+            <span>OR</span>
+            <input type="url" id="userURL" placeholder="Enter a URL (e.g., https://example.com)">
+            <button id="submitBtn">Convert</button>
+        </div>
+        <div id="loader" class="loader" style="display: none;"></div>
+        <div id="outputSection" class="output-section" style="display: none;">
+            <h2>Generated HTML:</h2>
+            <div id="output"></div>
+        </div>
+        <div id="errorSection" class="error-section" style="display: none;">
+            <h2>Error:</h2>
+            <p id="errorMessage"></p>
+        </div>
+    </div>
+    <!-- Link to JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
